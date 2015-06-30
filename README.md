@@ -68,7 +68,7 @@
 ]
 ```
 ***
-`http://.../api/route/1`
+`http://.../api/routes/1`
 ```
 {
   "id": 1,
