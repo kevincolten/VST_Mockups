@@ -1,7 +1,7 @@
 # VST_Mockups
 
 ##API
-`http://.../api/routes`
+`GET http://.../api/routes`
 ```
 [
   {
@@ -16,7 +16,8 @@
         "environment": "Truck (land)",
         "level_of_aggregation": "Pallet",
         "status": "Stationary",
-        "duration": 24
+        "duration": 24,
+        "route_id": 1
       },
       {
         "id": 2,
@@ -24,7 +25,8 @@
         "environment": "Seatainer (land)",
         "level_of_aggregation": "Pallet",
         "status": "Stationary",
-        "duration": 168
+        "duration": 168,
+        "route_id": 1
       },
       {
         "id": 3,
@@ -32,7 +34,8 @@
         "environment": "Seatainer (ocean)",
         "level_of_aggregation": "Pallet",
         "status": "Stationary",
-        "duration": 288
+        "duration": 288,
+        "route_id": 1
       },
       {
         "id": 4,
@@ -40,7 +43,8 @@
         "environment": "Warehouse/DC",
         "level_of_aggregation": "Pallet",
         "status": "Stationary",
-        "duration": 720
+        "duration": 720,
+        "route_id": 1
       },
       {
         "id": 5,
@@ -48,7 +52,8 @@
         "environment": "Warehouse/DC",
         "level_of_aggregation": "Store storage",
         "status": "Stationary",
-        "duration": 336
+        "duration": 336,
+        "route_id": 1
       },
       {
         "id": 6
@@ -56,7 +61,8 @@
         "environment": "Home",
         "level_of_aggregation": "Product",
         "status": "Stationary",
-        "duration": 1440
+        "duration": 1440,
+        "route_id": 1
       }
     ]
   },
@@ -68,7 +74,7 @@
 ]
 ```
 ***
-`http://.../api/routes/1`
+`GET http://.../api/routes/1`
 ```
 {
   "id": 1,
@@ -84,11 +90,23 @@
       "status": "Stationary",
       "duration": 24,
       "model_type": "Simple",
+      "route_id": 1,
       "descriptors": [
-        "id": 1,
-        "label": "corner",
-        "cases": 4,
-        "time_constant": 2
+        {
+          "id": 1,
+          "label": "corner",
+          "cases": 4,
+          "time_constant": 2,
+          "card_id": 1
+        },
+        {
+          "id": 2,
+          "label": "face2",
+          "cases": 12,
+          "time_constant": 4,
+          "card_id": 1
+        },
+        ...
       ]
     },
     {
@@ -96,5 +114,61 @@
       "location": "Charleston, South Carolina, US",
       ...
   ]
+}
+```
+***
+`GET http://.../api/cards/1`
+```
+{
+  "id": 1,
+  "location": "Cincinnati, Ohio, US",
+  "environment": "Truck (land)",
+  "level_of_aggregation": "Pallet",
+  "status": "Stationary",
+  "duration": 24,
+  "model_type": "Simple",
+  "route_id": 1,
+  "descriptors": [
+    {
+      "id": 1,
+      "label": "corner",
+      "cases": 4,
+      "time_constant": 2,
+      "card_id": 1
+    },
+    {
+      "id": 2,
+      "label": "face2",
+      "cases": 12,
+      "time_constant": 4,
+      "card_id": 1
+    },
+    ...
+  ]
+}
+```
+***
+`POST/PUT/DELETE http://.../api/cards/{1}`
+```
+{
+  "id": 1, //if PUT/DELETE
+  "location": "Cincinnati, Ohio, US",
+  "environment": "Truck (land)",
+  "level_of_aggregation": "Pallet",
+  "status": "Stationary",
+  "duration": 24,
+  "model_type": "Simple",
+  "route_id": 1
+}
+```
+***
+`POST/PUT/DELETE http://.../api/descriptors/{1}`
+```
+{
+  "id": 1, //if PUT/DELETE
+  "label": "corner",
+  "cases": 4,
+  "time_constant": 2,
+  "card_id": 1
 }
 ```
